@@ -1,7 +1,8 @@
 # meta-galaxy
 Give that old Palm Pilot new life!
-
-Main combined BitBake repo for building galaxy in its entirety.
+The base system comes with 2 UI environments: opie and Matchbox/GPE
+webOS UI is in the works. If you want to ghelp me with that, be my guest.
+Th is the main combined BitBake repo for building galaxy in its entirety.
 
 This layer depends on:
 
