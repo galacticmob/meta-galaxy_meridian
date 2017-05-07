@@ -1,0 +1,51 @@
+From 376dcb8ce2c9a6dab59e0a62a86549a490dee014 Mon Sep 17 00:00:00 2001
+From: "yanjun.zhu" <yanjun.zhu@windriver.com>
+Date: Wed, 20 May 2015 18:16:53 +0200
+Subject: [PATCH 1/4] Add a comment and fix some other comments
+
+Upstream-Status: Backport
+
+unsquashfs: add a commment and fix some other comments
+
+Signed-off-by: yanjun.zhu <yanjun.zhu@windriver.com>
+Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+---
+ squashfs-tools/unsquashfs.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/unsquashfs.c b/unsquashfs.c
+index 529dfac..4f26e18 100644
+--- a/unsquashfs.c
++++ b/unsquashfs.c
+@@ -814,7 +814,7 @@ int write_file(struct inode *inode, char *pathname)
+ 
+ 	/*
+ 	 * the writer thread is queued a squashfs_file structure describing the
+- 	 * file.  If the file has one or more blocks or a fragments they are
++ 	 * file.  If the file has one or more blocks or a fragment they are
+  	 * queued separately (references to blocks in the cache).
+  	 */
+ 	file->fd = file_fd;
+@@ -838,7 +838,7 @@ int write_file(struct inode *inode, char *pathname)
+ 		block->offset = 0;
+ 		block->size = i == file_end ? inode->data & (block_size - 1) :
+ 			block_size;
+-		if(block_list[i] == 0) /* sparse file */
++		if(block_list[i] == 0) /* sparse block */
+ 			block->buffer = NULL;
+ 		else {
+ 			block->buffer = cache_get(data_cache, start,
+@@ -2156,6 +2156,10 @@ options:
+ 	block_size = sBlk.s.block_size;
+ 	block_log = sBlk.s.block_log;
+ 
++	/*
++	 * convert from queue size in Mbytes to queue size in
++	 * blocks
++	 */
+ 	fragment_buffer_size <<= 20 - block_log;
+ 	data_buffer_size <<= 20 - block_log;
+ 	initialise_threads(fragment_buffer_size, data_buffer_size);
+-- 
+2.1.4
+
